@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -30,6 +30,7 @@
     nameL.text = @"账号:";
     nameTF.leftView = nameL;
     nameTF.leftViewMode = UITextFieldViewModeAlways;
+    nameTF.delegate = self;
     [self.view addSubview:nameTF];
     
     UITextField *passTF = [[UITextField alloc] initWithFrame:CGRectMake(SCREENWIDTH / 2.0 - 100, 250, 200, 30)];
@@ -38,10 +39,29 @@
     passL.text = @"密码:";
     passTF.leftView = passL;
     passTF.leftViewMode = UITextFieldViewModeAlways;
+    passTF.delegate = self;
     [self.view addSubview:passTF];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(SCREENWIDTH / 2.0 - 100, CGRectGetMaxY(passTF.frame) + 30, 200, 30);
+    button.layer.cornerRadius = 5;
+    button.layer.masksToBounds = YES;
+    button.backgroundColor = [UIColor cyanColor];
+    [button setTitle:@"登录" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.view addSubview:button];
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
