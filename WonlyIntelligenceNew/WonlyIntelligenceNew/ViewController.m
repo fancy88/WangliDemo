@@ -51,6 +51,34 @@
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    
+    
+    UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH / 2.0 - 50, CGRectGetMaxY(button.frame) + 50, 100, 30)];
+     aLabel.text = @"Hello World";
+    aLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:aLabel];
+    //定义路径参数：
+    CGRect rect = CGRectMake(0, 0, 100, 30);
+    CGSize radii = CGSizeMake(20, 20); // 定义原角大小
+    UIRectCorner corners = UIRectCornerTopLeft |
+    UIRectCornerBottomRight; // 标记左上和右下为圆角
+    
+    //创建路径，这里使用贝塞尔曲线
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:radii];
+    
+    //创建CAShapeLayer
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.fillColor = [UIColor clearColor].CGColor;//RGBA(169, 252, 121, 0.5).CGColor;
+    // RGBA(169, 252, 121, 0.8)
+    shapeLayer.strokeColor = [UIColor redColor].CGColor; // 设置线条的颜色
+    shapeLayer.lineWidth = 1;
+    shapeLayer.lineJoin = kCALineJoinRound;
+    shapeLayer.lineCap = kCALineCapRound;
+    shapeLayer.path = path.CGPath; // 指定前面设置好path
+    
+    // 将创建好的CAShapeLayer添加为UILabel的子layer
+    [aLabel.layer addSublayer:shapeLayer];
 }
 
 
