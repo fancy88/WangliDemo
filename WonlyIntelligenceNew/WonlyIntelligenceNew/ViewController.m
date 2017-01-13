@@ -49,9 +49,14 @@
     button.backgroundColor = [UIColor cyanColor];
     [button setTitle:@"登录" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }
 
+
+- (void)buttonAction: (UIButton *)button{
+    NSLog(@"点击登录");
+}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
